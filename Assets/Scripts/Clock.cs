@@ -12,19 +12,19 @@ public class Clock : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI Time;
    
-    public int timezoneOffset = 0;
+    public int timeChange = 0;
    
-    DateTime GetDateTime()
+    DateTime getTime()
     {
         DateTime utcNow = DateTime.UtcNow;
-        return utcNow.AddHours(timezoneOffset);
+        return utcNow.AddHours(timeChange);
     }
     // Start is called before the first frame update
     // Update is called once per frame
     void Update()   
     {
-        Time.text = GetDateTime().ToString();
-        DateTime time = GetDateTime();
+        Time.text = getTime().ToString();
+        DateTime time = getTime();
     	hoursPivot.localRotation = Quaternion.Euler(0f, 0f, hoursToDegrees * (float)time.TimeOfDay.TotalHours);
         minutesPivot.localRotation = Quaternion.Euler(0f, 0f, minutesToDegrees * (float)time.TimeOfDay.TotalMinutes);
 		secondsPivot.localRotation = Quaternion.Euler(0f, 0f, secondsToDegrees * (float)time.TimeOfDay.TotalSeconds);
